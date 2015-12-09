@@ -252,7 +252,8 @@ when we visit the home page of our site the main output will look like this:
 ### The Data Bags
 
 The “data bags” are just arrays that contains different keys and information wich are passed to the different files on wireRenderFile() method. Here we used 3 data bags. The main one beign called viewBag, the one used for header scripts beign called headerBag and the last one used for footer scripts beign called footerBag. They were set in the _init.php file and available for all templates.
-Conclusion
+
+### Conclusion
 
 The Wire Render approach enables better code organization and reutilization. Relies on standard Processwire methods and its flexible enough for adapting it to your needs.
 
