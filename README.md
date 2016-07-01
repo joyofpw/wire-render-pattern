@@ -218,7 +218,7 @@ $viewBag['headerBag'] = $headerBag;
 
 $output = wireRenderFile('globals/header', $viewBag);
 
-$ouput .= $content;
+$output .= $content;
 
 $viewBag['footerBag'] = $footerBag;
 
