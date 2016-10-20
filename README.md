@@ -1,7 +1,21 @@
 # The Wire Render Pattern
 
-This pattern or approach is what I´m using when creating new projects using Processwire. It heavily uses the wireRenderFile() method so thats the reason of the name, and so it will work only on PW versions that implement that method. This pattern does not need additional modules and enables easier code organization and reutilization. Feel free to adapt this way of doing projects to your own way, Processwire is awesome and flexible enough to support various ways of organization and patterns.
-The directory structure
+This pattern or approach is what I´m using when creating new projects using Processwire. It heavily uses the `wireRenderFile()` method so thats the reason of the name, and so it will work only on PW versions that implement that method. This pattern does not need additional modules and enables easier code organization and reutilization. Feel free to adapt this way of doing projects to your own way, Processwire is awesome and flexible enough to support various ways of organization and patterns.
+
+### The wireRenderFile()
+The `wireRenderFile()` method is a wrapper to the `wire('files')->render()` method. You can choose the method that fits better in your use case. Note this function returns the output for you to output wherever you want (delayed output). For direct output, use the `wireInclude()` function instead. 
+
+**Example**
+
+```
+	$files = wire('files');
+	$files->render($filename, $vars, $options);
+``` 
+
+See https://github.com/processwire/processwire/blob/master/wire/core/Functions.php#L487
+for a full documentation of the function.
+
+### The directory structure
 
 In Processwire you can organize your code the way it make most sence to you. All the files should be in the /site/templates/ directory. In this pattern the directory structure will be:
 
