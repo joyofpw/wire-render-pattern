@@ -2,7 +2,7 @@
 
 This pattern or approach is what I´m using when creating new projects using Processwire. It heavily uses the `wireRenderFile()` method so thats the reason of the name, and so it will work only on PW versions that implement that method. This pattern does not need additional modules and enables easier code organization and reutilization. Feel free to adapt this way of doing projects to your own way, Processwire is awesome and flexible enough to support various ways of organization and patterns.
 
-### The wireRenderFile()
+### The wireRenderFile() method
 The `wireRenderFile()` method is a wrapper to the `wire('files')->render()` method. You can choose the method that fits better in your use case. Note this function returns the output for you to output wherever you want (delayed output). For direct output, use the `wireInclude()` function instead. 
 
 **Example**
@@ -14,6 +14,23 @@ The `wireRenderFile()` method is a wrapper to the `wire('files')->render()` meth
 
 See https://github.com/processwire/processwire/blob/master/wire/core/Functions.php#L487
 for a full documentation of the function.
+
+### The region() method
+Since Processwire 3.0.39 the `region()` is available. You can know more about it here
+http://processwire.com/blog/posts/processwire-3.0.39-core-updates/
+
+The new region function provides a nice option for delayed output on the front-end, letting you define regions for output, populate content to it, and retrieve it when ready for output. It's a good alternative to using variables for the same purpose, as editor environments often don't recognize the relationship of variables between files like `_init.php` (prepend file), template files, and `_main.php` (append file). It prevents your editor from flagging variables as undefined, and reduces the chance of variable collisions or variables getting accidentally overwritten.
+
+The region function can be accessed as `wireRegion()`, or if you have `$config->useFunctionsAPI` enabled, it can also be accessed as just `region()`.
+
+**Example**
+```php
+// output regions in appropriate locations
+<h1><?php echo region('headline'); ?></h1>
+<div id='content'>
+  <?php echo region('content'); ?>
+</div>
+```
 
 ### The directory structure
 
