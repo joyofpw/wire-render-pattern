@@ -284,6 +284,34 @@ when we visit the home page of our site the main output will look like this:
 
 The “data bags” are just arrays that contains different keys and information wich are passed to the different files on `wireRenderFile()` method. Here we used 3 data bags. The main one beign called viewBag, the one used for header scripts beign called `headerBag` and the last one used for footer scripts beign called `footerBag`. They were set in the `_init.php` file and available for all templates.
 
+### Using the $page object as data bag
+You can also use the `$page` object for storing data and pass that to the views. It's better to use namespaces.
+
+Example
+
+*hello.php*
+
+```php
+<?php
+namespace Processwire;
+
+$page->message = 'Hello World';
+
+$body = wireRenderFile('views/hello');
+```
+
+*views/hello.php*
+
+```php
+<?php
+namespace Processwire;
+?>
+
+<html>
+<body><?php echo $page->message ?></body>
+</html>
+```
+
 ### Conclusion
 
 The Wire Render approach enables better code organization and reutilization. Relies on standard Processwire methods and its flexible enough for adapting it to your needs.
