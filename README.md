@@ -13,6 +13,7 @@ The `wireRenderFile()` method is a wrapper to the `wire('files')->render()` meth
 ``` 
 
 See https://github.com/processwire/processwire/blob/master/wire/core/Functions.php#L487
+and https://processwire.com/api/ref/files/render/
 for a full documentation of the function.
 
 ### The region() method
