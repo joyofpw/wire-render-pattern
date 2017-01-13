@@ -33,6 +33,10 @@ The region function can be accessed as `wireRegion()`, or if you have `$config->
 </div>
 ```
 
+### Field templates
+Since Processwire 3.0.5 fields could use a template. This gives a better code organization. 
+Read more about here https://processwire.com/blog/posts/processwire-3.0.7-expands-field-rendering-page-path-history-and-more/ and here https://processwire.com/blog/posts/more-repeaters-repeater-matrix-and-new-field-rendering/
+
 ### The directory structure
 
 In Processwire you can organize your code the way it make most sence to you. All the files should be in the `/site/templates/` directory. In this pattern the directory structure will be:
@@ -44,6 +48,7 @@ In Processwire you can organize your code the way it make most sence to you. All
   * scripts
   * views
   * vendor
+  * includes
 
 ### The Assets Directory
 
@@ -56,7 +61,7 @@ This directory is for storing the front-end files like css, js, img, fonts, etc.
 
 ### The Helpers Directory
 
-The helpers directory is for code that can be used across all files in the project. Mainly for small code snippets or functions that do not output front-end code.
+The helpers directory is for code that can be used across all files in the project. Mainly for small code snippets or functions that do not output front-end code. 
 
 An example file that should be put in helpers it is this code that I use mainly for debugging. Debug Helper.
 
@@ -84,7 +89,7 @@ You have a `home.php` template and a `views/home.php` file. All the logic (query
 
 ### The Vendor
 
-The Vendor directory its used for files that are external to your system. Mainly for libraries, sdks or code made by other people outside you or your organization. Maybe you could put here an Excel Export script or the SDK for Mandrill API.
+The Vendor directory is used for files that are external to your system. Mainly for libraries, sdks or code made by other people outside you or your organization. Maybe you could put here an Excel Export script or the SDK for Mandrill API.
 Using Delayed Output
 
 For this pattern to work needs the delayed output strategy. Basically we will use two files inside `/site/templates/` and autoload them for every template. The files needed are _init.php and _main.php. Using this strategy will make easier to configure the final output for the template.
@@ -99,6 +104,66 @@ First you must add the files to the `/site/config.php` file.
 $config->prependTemplateFile = '_init.php';
 $config->appendTemplateFile = '_main.php';
 ```
+
+### The Includes
+
+The Includes directory is used for code that may be used in different files or a section inside a bigger file. When you need to separate a big file in smaller units, use `wireIncludeFile()` function and you will have a nicer organization.
+
+*Example include file*
+
+Create a file named `includes/convenience-methods.php`
+
+```php
+<?php namespace ProcessWire;
+
+// Render Functions
+
+function renderView($path, $params = [])
+{
+  $path = "views/$path";
+  return wireRenderFile($path, $params);
+}
+
+function renderPartial($path, $params = [])
+{
+  $path = "partials/$path";
+  return wireRenderFile($path, $params);
+}
+
+function renderScript($path, $params = [])
+{
+  $path = "scripts/$path";
+  return wireRenderFile($path, $params);
+}
+
+function renderGlobal($path, $params = [])
+{
+  $path = "globals/$path";
+  return wireRenderFile($path, $params);
+}
+
+// Import functions
+
+function importFile($path, $params = [])
+{
+  $path = "includes/$path";
+  wireIncludeFile($path, $params);
+}
+
+function importHelper($path, $params = [])
+{
+  $path = "helpers/$path";
+  wireIncludeFile($path, $params);
+}
+```
+
+Now in `_init.php` file you could put
+
+```
+<?php
+wireIncludeFile('includes/wire-methods.php');
+```
+And have access to those convenience methods in all files.
 
 ### The _init.php file
 
