@@ -159,9 +159,9 @@ function importHelper($path, $params = [])
 
 Now in `_init.php` file you could put
 
-```
+```php
 <?php
-wireIncludeFile('includes/wire-methods.php');
+wireIncludeFile('includes/convenience-methods.php');
 ```
 And have access to those convenience methods in all files.
 
