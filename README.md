@@ -382,4 +382,4 @@ namespace Processwire;
 
 The Wire Render approach enables better code organization and reutilization. Relies on standard Processwire methods and its flexible enough for adapting it to your needs.
 
-For sample files used in this post please check `example` directory.
+For example files please check `examples` directory.
